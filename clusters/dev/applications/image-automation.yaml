@@ -1,0 +1,58 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: go-greeting-api-image-automation
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./apps/go_greeting_api/image-automation
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: rails-greeting-api-image-automation
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./apps/rails_greeting_api/image-automation
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: nodejs-greeting-api-image-automation
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./apps/nodejs_greeting_api/image-automation
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  validation: client
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: dotnet-greeting-api-image-automation
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./apps/dotnet_greeting_api/image-automation
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  validation: client
