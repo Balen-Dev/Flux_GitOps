@@ -1,13 +1,14 @@
+---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata:
-  name: apps-image-update
+  name: dotnet-greeting-api
   namespace: flux-system
 spec:
   interval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: gitops-apps
+    name: apps-gitops
   git:
     checkout:
       ref:
@@ -17,26 +18,103 @@ spec:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: |
-        Automated image update
+        Automated image update for dotnet-greeting-api
 
-        Automation name: {{ .AutomationObject }}
-
-        Files:
-        {{ range $filename, $_ := .Updated.Files -}}
-        - {{ $filename }}
-        {{ end -}}
-
-        Objects:
-        {{ range $resource, $_ := .Updated.Objects -}}
-        - {{ $resource.Kind }} {{ $resource.Name }}
-        {{ end -}}
-
-        Images:
-        {{ range .Updated.Images -}}
-        - {{.}}
-        {{ end -}}
+        {{range .Updated.Images}}
+        {{println .}}
+        {{end}}
     push:
       branch: main
   update:
-    path: "./apps/dev"
     strategy: Setters
+    path: "./apps/dotnet_greeting_api"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: go-greeting-api
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        Automated image update for go-greeting-api
+
+        {{range .Updated.Images}}
+        {{println .}}
+        {{end}}
+    push:
+      branch: main
+  update:
+    strategy: Setters
+    path: "./apps/go_greeting_api"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: nodejs-greeting-api
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        Automated image update for nodejs-greeting-api
+
+        {{range .Updated.Images}}
+        {{println .}}
+        {{end}}
+    push:
+      branch: main
+  update:
+    strategy: Setters
+    path: "./apps/nodejs_greeting_api"
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: rails-greeting-api
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: apps-gitops
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        Automated image update for rails-greeting-api
+
+        {{range .Updated.Images}}
+        {{println .}}
+        {{end}}
+    push:
+      branch: main
+  update:
+    strategy: Setters
+    path: "./apps/rails_greeting_api"
